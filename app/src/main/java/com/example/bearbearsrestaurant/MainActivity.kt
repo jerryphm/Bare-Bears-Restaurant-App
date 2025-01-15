@@ -1,6 +1,7 @@
 package com.example.bearbearsrestaurant
 
 import BearsBottomBar
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,6 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.internal.composableLambda
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -62,8 +64,19 @@ fun App(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val isInHome = navBackStackEntry?.destination?.route == BearScreen.Home.name
     val routeTitle = BearScreen.valueOf(navBackStackEntry?.destination?.route ?: BearScreen.Home.name).title
+    val isInSummary = navBackStackEntry?.destination?.route == BearScreen.OrderSummary.name
 
-    fun sendOrderToIcedBear() {}
+    val context = LocalContext.current
+    fun sendOrderToIcedBear() {
+        val orderSummary = "${orderUiState.mainDish?.name}, ${orderUiState.sideDish?.name} and ${orderUiState.drink?.name}"
+        val intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, orderSummary)
+            type = "text/plain"
+        }
+        val shareIntent = Intent.createChooser(intent, "Hi Iced Bear :), this is my order")
+        context.startActivity(shareIntent)
+    }
 
     Scaffold(
         topBar = {
@@ -76,6 +89,7 @@ fun App(
         bottomBar = {
             BearsBottomBar(
                 isVisible = !isInHome,
+                isInSummary = isInSummary,
                 onCancelPressed = {
                     navController.popBackStack(BearScreen.Home.name, false)
                     orderViewModel.resetOrder()

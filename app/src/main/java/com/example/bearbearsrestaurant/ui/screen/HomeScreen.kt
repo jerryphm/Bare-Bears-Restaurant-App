@@ -4,12 +4,20 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.automirrored.rounded.ArrowForward
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.rounded.ArrowForward
 import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -68,15 +76,26 @@ fun HomeScreen(
                 disabledContentColor = BearWhite
             )
         ) {
-            Text(
-                text = "Start Ordering!",
-                fontFamily = bearBodyTypeFace,
-                fontSize = 24.sp,
-                lineHeight = 36.sp,
-                letterSpacing = 0.sp,
-                textAlign = TextAlign.Center,
-                fontWeight = FontWeight.Normal
-            )
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Start Ordering",
+                    fontFamily = bearBodyTypeFace,
+                    fontSize = 24.sp,
+                    lineHeight = 36.sp,
+                    letterSpacing = 0.sp,
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Normal
+                )
+                Spacer(Modifier.width(6.dp))
+                Icon(
+                    Icons.AutoMirrored.Filled.ArrowForward,
+                    contentDescription = "Start Ordering"
+                )
+            }
+
         }
     }
 }

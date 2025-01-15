@@ -86,7 +86,7 @@ fun OrderSummary(
             text = buildAnnotatedString {
                 append("Total: ")
                 withStyle(style = SpanStyle(fontWeight = FontWeight.ExtraBold)) {
-                    append("${orderUiState.total}$")
+                    append("${String.format("%.1f", orderUiState.total)}$")
                 }
             },
             fontFamily = bearBodyTypeFace,

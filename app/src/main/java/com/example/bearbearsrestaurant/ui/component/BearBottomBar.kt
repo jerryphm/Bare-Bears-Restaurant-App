@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -27,6 +26,7 @@ import com.example.bearbearsrestaurant.ui.theme.bearBodyTypeFace
 @Composable
 fun BearsBottomBar(
     isVisible: Boolean = true,
+    isInSummary: Boolean = false,
     onCancelPressed: () -> Unit = {},
     onNextPressed: () -> Unit = {},
     modifier: Modifier = Modifier
@@ -79,7 +79,7 @@ fun BearsBottomBar(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "Next",
+                    text = if (isInSummary) "Send to Iced Bear!" else "Next Dish",
                     fontFamily = bearBodyTypeFace,
                     fontWeight = FontWeight.Normal,
                     fontSize = 24.sp,
