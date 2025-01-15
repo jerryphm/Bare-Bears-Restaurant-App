@@ -28,7 +28,10 @@ import com.example.bearbearsrestaurant.ui.theme.BearBlack
 import com.example.bearbearsrestaurant.ui.theme.bearBodyTypeFace
 
 @Composable
-fun MainDishSelectionScreen(modifier: Modifier = Modifier) {
+fun DishSelectionScreen(
+    options: List<Dish>,
+    modifier: Modifier = Modifier
+) {
     var selectedDish: Dish? by rememberSaveable { mutableStateOf(null) }
 
     Column(
@@ -37,7 +40,7 @@ fun MainDishSelectionScreen(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .selectableGroup()
     ) {
-        DataSource.mainDishes.forEach {
+        options.forEach {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -85,5 +88,5 @@ fun MainDishSelectionScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun MainDishSelectionScreenPreview() {
-    MainDishSelectionScreen()
+    DishSelectionScreen(options = DataSource.mainDishes)
 }

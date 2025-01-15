@@ -17,12 +17,12 @@ object DataSource {
         Dish("Grilled Vegetables", "A mix of seasonal veggies grilled to perfection with olive oil and herbs.", 6.0)
     )
 
-    val drinks: List<Drink> = listOf(
-        Drink("Soda", 2.0),
-        Drink("Iced Tea", 3.0),
-        Drink("Lemonade", 2.5),
-        Drink("Coffee", 2.8),
-        Drink("Smoothie", 4.0),
-        Drink("Water", 1.0)
+    val drinks: List<Dish> = listOf(
+        Dish("Coca-Cola", "Classic refreshing soda to complement your meal.", 2.5),
+        Dish("Iced Tea", "Chilled tea with a hint of lemon, served over ice.", 3.0),
+        Dish("Lemonade", "Freshly squeezed lemons with a touch of sweetness, served cold.", 3.5),
+        Dish("Espresso", "Rich and bold shot of coffee for a quick pick-me-up.", 2.8),
+        Dish("Milkshake", "Thick and creamy shake in chocolate, vanilla, or strawberry flavor.", 4.5),
+        Dish("Mineral Water", "Pure, refreshing, and hydrating bottled water.", 1.5)
     )
 }
