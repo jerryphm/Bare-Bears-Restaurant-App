@@ -32,7 +32,7 @@ fun DishSelectionScreen(
     options: List<Dish>,
     modifier: Modifier = Modifier
 ) {
-    var selectedDish: Dish? by rememberSaveable { mutableStateOf(null) }
+    var selectedDishName: String by rememberSaveable { mutableStateOf("") }
 
     Column(
         modifier = modifier
@@ -45,13 +45,13 @@ fun DishSelectionScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .selectable(
-                        selected = selectedDish?.name == it.name,
-                        onClick = { selectedDish = it }
+                        selected = selectedDishName == it.name,
+                        onClick = { selectedDishName = it.name }
                     )
             ) {
                 RadioButton(
-                    selected = selectedDish?.name == it.name,
-                    onClick = { selectedDish = it},
+                    selected = selectedDishName == it.name,
+                    onClick = { selectedDishName = it.name },
                     colors = RadioButtonColors(
                         selectedColor = BearBlack,
                         unselectedColor = BearBlack,

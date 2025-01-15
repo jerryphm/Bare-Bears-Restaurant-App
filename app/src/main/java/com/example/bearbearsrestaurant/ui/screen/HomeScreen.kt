@@ -28,7 +28,10 @@ import com.example.bearbearsrestaurant.ui.theme.bearBodyTypeFace
 import com.example.bearbearsrestaurant.ui.theme.bearDisplayTypeFace
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(
+    onStartOrderingPressed: () -> Unit = {},
+    modifier: Modifier = Modifier
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -52,7 +55,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         )
         Spacer(Modifier.height(96.dp))
         TextButton(
-            onClick = {},
+            onClick = onStartOrderingPressed,
             shape = RoundedCornerShape(12.dp),
             contentPadding = PaddingValues(
                 horizontal = 16.dp,

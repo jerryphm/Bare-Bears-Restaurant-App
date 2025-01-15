@@ -15,6 +15,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,6 +26,7 @@ import com.example.bearbearsrestaurant.ui.theme.bearBodyTypeFace
 
 @Composable
 fun BearsBottomBar(
+    isVisible: Boolean = true,
     onCancelPressed: () -> Unit = {},
     onNextPressed: () -> Unit = {},
     modifier: Modifier = Modifier
@@ -35,6 +37,7 @@ fun BearsBottomBar(
             .fillMaxWidth()
             .padding(20.dp)
             .navigationBarsPadding()
+            .alpha(if (isVisible) 1f else 0f)
     ) {
         Text(
             text = "27$",
