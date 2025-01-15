@@ -39,16 +39,6 @@ fun BearsBottomBar(
             .navigationBarsPadding()
             .alpha(if (isVisible) 1f else 0f)
     ) {
-        Text(
-            text = "27$",
-            fontFamily = bearBodyTypeFace,
-            fontWeight = FontWeight.ExtraBold,
-            fontSize = 32.sp,
-            lineHeight = 48.sp,
-            letterSpacing = 0.sp,
-            color = BearBlack
-        )
-        Spacer(Modifier.height(16.dp))
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier

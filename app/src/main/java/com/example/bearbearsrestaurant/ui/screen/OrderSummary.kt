@@ -98,7 +98,7 @@ fun OrderSummary(
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            text = "(included ${orderUiState.total - orderUiState.subTotal}$ tax)",
+            text = "(included ${String.format("%.1f", orderUiState.total - orderUiState.subTotal)}$ tax)",
             fontFamily = bearBodyTypeFace,
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp,

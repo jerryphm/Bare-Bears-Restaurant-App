@@ -9,10 +9,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.internal.composableLambda
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
@@ -27,6 +29,8 @@ import com.example.bearbearsrestaurant.ui.screen.DishSelectionScreen
 import com.example.bearbearsrestaurant.ui.screen.HomeScreen
 import com.example.bearbearsrestaurant.ui.screen.OrderSummary
 import com.example.bearbearsrestaurant.ui.theme.BearBearsRestaurantTheme
+import com.example.bearbearsrestaurant.ui.viewmodel.DishType
+import com.example.bearbearsrestaurant.ui.viewmodel.OrderViewModel
 
 enum class BearScreen(val title: String) {
     Home("Home"),
@@ -50,8 +54,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun App(
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    orderViewModel: OrderViewModel = viewModel()
 ) {
+    val orderUiState by orderViewModel.uiState.collectAsState()
+
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val isInHome = navBackStackEntry?.destination?.route == BearScreen.Home.name
     val routeTitle = BearScreen.valueOf(navBackStackEntry?.destination?.route ?: BearScreen.Home.name).title
@@ -71,6 +78,7 @@ fun App(
                 isVisible = !isInHome,
                 onCancelPressed = {
                     navController.popBackStack(BearScreen.Home.name, false)
+                    orderViewModel.resetOrder()
                 },
                 onNextPressed = {
                     when (navBackStackEntry?.destination?.route) {
@@ -107,21 +115,30 @@ fun App(
             composable(BearScreen.MainDishSelection.name) {
                 DishSelectionScreen(
                     options = DataSource.mainDishes,
+                    onSelectionChanged = {
+                        orderViewModel.selectDish(it, DishType.Main)
+                    }
                 )
             }
             composable(BearScreen.SideDishSelection.name) {
                 DishSelectionScreen(
                     options = DataSource.sideDishes,
+                    onSelectionChanged = {
+                        orderViewModel.selectDish(it, DishType.Side)
+                    }
                 )
             }
             composable(BearScreen.DrinkSelection.name) {
                 DishSelectionScreen(
                     options = DataSource.drinks,
+                    onSelectionChanged = {
+                        orderViewModel.selectDish(it, DishType.Drink)
+                    }
                 )
             }
             composable(BearScreen.OrderSummary.name) {
                 OrderSummary(
-                    orderUiState = OrderUiState(),
+                    orderUiState = orderUiState,
                 )
             }
         }

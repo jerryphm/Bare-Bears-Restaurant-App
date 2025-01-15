@@ -30,6 +30,7 @@ import com.example.bearbearsrestaurant.ui.theme.bearBodyTypeFace
 @Composable
 fun DishSelectionScreen(
     options: List<Dish>,
+    onSelectionChanged: (Dish) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     var selectedDishName: String by rememberSaveable { mutableStateOf("") }
@@ -46,12 +47,18 @@ fun DishSelectionScreen(
                     .fillMaxWidth()
                     .selectable(
                         selected = selectedDishName == it.name,
-                        onClick = { selectedDishName = it.name }
+                        onClick = {
+                            selectedDishName = it.name
+                            onSelectionChanged(it)
+                        }
                     )
             ) {
                 RadioButton(
                     selected = selectedDishName == it.name,
-                    onClick = { selectedDishName = it.name },
+                    onClick = {
+                        selectedDishName = it.name
+                        onSelectionChanged(it)
+                    },
                     colors = RadioButtonColors(
                         selectedColor = BearBlack,
                         unselectedColor = BearBlack,
